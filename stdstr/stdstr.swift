@@ -246,9 +246,6 @@ extension String {
         }
     }
     
-    // TOOD: More methods
-    // compare
-    
     func substr(pos: Int = 0, _ len: Int = String.npos) -> String {
         let end = Int(min(UInt(pos) + UInt(len), UInt(length())))
         return substringWithRange(startIndex.advancedBy(pos) ..< startIndex.advancedBy(end))
@@ -314,5 +311,9 @@ extension String {
 // const char* c_str() const;
 // const char* data() const;
 // allocator_type get_allocator() const;
-//
-
+// int compare(const string &str) const;
+// int compare(size_t pos, size_t len, const string &str) const;
+// int compare(size_t pos, size_t len, const string &str, size_t subpos, size_t sublen) const;
+// int compare(const char *s) const;
+// int compare(size_t pos, size_t len, const char *s) const;
+// int compare(size_t pos, size_t len, const char *s, size_t n) const;
