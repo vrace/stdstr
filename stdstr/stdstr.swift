@@ -230,8 +230,23 @@ extension String {
         }
     }
     
+    func find_last_not_of(str: String, _ pos: Int = String.npos) -> Int {
+        return iterateBackward(pos) {
+            str.find(self.at($0)) == String.npos
+        }
+    }
+    
+    func find_last_not_of(s: String, _ pos: Int, n: Int) -> Int {
+        return find_last_not_of(s.substr(0, n), pos)
+    }
+    
+    func find_last_not_of(c: Character, _ pos: Int = 0) -> Int {
+        return iterateBackward(pos) {
+            self.at($0) != c
+        }
+    }
+    
     // TOOD: More methods
-    // find_last_not_of
     // compare
     
     func substr(pos: Int = 0, _ len: Int = String.npos) -> String {

@@ -274,4 +274,13 @@ class stdstrTests: XCTestCase {
         let found = str.find_first_not_of("abcdefghijklmnopqrstuvwxyz ")
         XCTAssert(found == 12)
     }
+    
+    func test_find_last_not_of() {
+        var str = "Please, erase trailing white-spaces    \n"
+        let whitespaces = " \t\n\r"
+        
+        let found = str.find_last_not_of(whitespaces)
+        XCTAssert(found != String.npos)
+        XCTAssert(str.erase(found + 1) == "Please, erase trailing white-spaces")
+    }
 }
