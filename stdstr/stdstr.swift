@@ -3,8 +3,6 @@ import Foundation
 extension String {
     static let npos: Int = Int.max
     
-    // TODO: constructors
-    
     func size() -> Int {
         return characters.count
     }
@@ -67,9 +65,7 @@ extension String {
     }
     
     mutating func append(n: Int, _ c: Character) -> String {
-        for _ in 0.stride(to: n, by: 1) {
-            self.append(c)
-        }
+        self.append(String(count: n, repeatedValue: c))
         return self
     }
     
@@ -109,9 +105,7 @@ extension String {
     }
     
     mutating func insert(pos: Int, _ n: Int, _ c: Character) -> String {
-        var str = ""
-        str.assign(n, c)
-        return insert(pos, str)
+        return insert(pos, String(count: n, repeatedValue: c))
     }
     
     mutating func erase(pos: Int = 0, _ len: Int = String.npos) -> String {
@@ -134,9 +128,7 @@ extension String {
     }
     
     mutating func replace(pos: Int, _ len: Int, _ n: Int, _ c: Character) -> String {
-        var str = ""
-        str.assign(n, c)
-        return replace(pos, len, str)
+        return replace(pos, len, String(count: n, repeatedValue: c))
     }
     
     mutating func swap(inout str: String) {
