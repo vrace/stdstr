@@ -253,4 +253,19 @@ class stdstrTests: XCTestCase {
         }
         XCTAssert(str == "Pl**s*, r*pl*c* th* v*w*ls *n th*s s*nt*nc* by *st*r*sks.")
     }
+    
+    func test_find_last_of() {
+        let path1 = "/usr/bin/man"
+        let path2 = "C:\\windows\\winhelp.exe"
+        let delimiters = "/\\"
+        var found = String.npos
+        
+        found = path1.find_last_of(delimiters)
+        XCTAssert(found != String.npos)
+        XCTAssert(path1.substr(found + 1) == "man")
+        
+        found = path2.find_last_of(delimiters)
+        XCTAssert(found != String.npos)
+        XCTAssert(path2.substr(found + 1) == "winhelp.exe")
+    }
 }

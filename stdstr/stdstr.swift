@@ -216,8 +216,29 @@ extension String {
         return String.npos
     }
     
+    func find_last_of(str: String, _ pos: Int = String.npos) -> Int {
+        for index in min(length() - 1, pos).stride(through: 0, by: -1) {
+            if str.find(at(index)) != String.npos {
+                return index
+            }
+        }
+        return String.npos
+    }
+    
+    func find_last_of(s: String, _ pos: Int, _ n: Int) -> Int {
+        return find_last_of(s.substr(0, n), pos)
+    }
+    
+    func find_last_of(c: Character, _ pos: Int = String.npos) -> Int {
+        for index in min(length() - 1, pos).stride(through: 0, by: -1) {
+            if at(index) == c {
+                return index
+            }
+        }
+        return String.npos
+    }
+    
     // TOOD: More methods
-    // find_last_of
     // find_first_not_of
     // find_last_not_of
     // compare
