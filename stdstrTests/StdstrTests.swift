@@ -268,4 +268,10 @@ class stdstrTests: XCTestCase {
         XCTAssert(found != String.npos)
         XCTAssert(path2.substr(found + 1) == "winhelp.exe")
     }
+    
+    func test_find_first_not_of() {
+        let str = "look for non-alphabetic characters..."
+        let found = str.find_first_not_of("abcdefghijklmnopqrstuvwxyz ")
+        XCTAssert(found == 12)
+    }
 }

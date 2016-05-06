@@ -214,8 +214,23 @@ extension String {
         }
     }
     
+    func find_first_not_of(str: String, _ pos: Int = 0) -> Int {
+        return iterateForward(pos) {
+            str.find(self.at($0)) == String.npos
+        }
+    }
+    
+    func find_first_not_of(s: String, _ pos: Int, n: Int) -> Int {
+        return find_first_not_of(s.substr(0, n), pos)
+    }
+    
+    func find_first_not_of(c: Character, _ pos: Int = 0) -> Int {
+        return iterateForward(pos) {
+            self.at($0) != c
+        }
+    }
+    
     // TOOD: More methods
-    // find_first_not_of
     // find_last_not_of
     // compare
     
