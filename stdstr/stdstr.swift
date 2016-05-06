@@ -151,12 +151,9 @@ extension String {
     }
     
     func find(str: String, _ pos: Int = 0) -> Int {
-        for index in pos.stride(to: length(), by: 1) {
-            if substr(index, str.length()) == str {
-                return index
-            }
+        return iterateForward(pos) {
+            self.substr($0, str.length()) == str
         }
-        return String.npos
     }
     
     func find(s: String, _ pos: Int, _ n: Int) -> Int {
@@ -164,21 +161,15 @@ extension String {
     }
     
     func find(c: Character, _ pos: Int = 0) -> Int {
-        for index in pos.stride(to: length(), by: 1) {
-            if at(index) == c {
-                return index
-            }
+        return iterateForward(pos) {
+            self.at($0) == c
         }
-        return String.npos
     }
     
     func rfind(str: String, _ pos: Int = String.npos) -> Int {
-        for index in min(length() - 1, pos).stride(through: 0, by: -1) {
-            if substr(index, str.length()) == str {
-                return index
-            }
+        return iterateBackward(pos) {
+            self.substr($0, str.length()) == str
         }
-        return String.npos
     }
     
     func rfind(s: String, _ pos: Int, _ n: Int) -> Int {
@@ -186,21 +177,15 @@ extension String {
     }
     
     func rfind(c: Character, _ pos: Int = String.npos) -> Int {
-        for index in min(length() - 1, pos).stride(through: 0, by: -1) {
-            if at(index) == c {
-                return index
-            }
+        return iterateBackward(pos) {
+            self.at($0) == c
         }
-        return String.npos
     }
     
     func find_first_of(str: String, _ pos: Int = 0) -> Int {
-        for index in pos.stride(to: length(), by: 1) {
-            if str.find(at(index)) != String.npos {
-                return index
-            }
+        return iterateForward(pos) {
+            str.find(self.at($0)) != String.npos
         }
-        return String.npos
     }
     
     func find_first_of(s: String, _ pos: Int, _ n: Int) -> Int {
@@ -208,21 +193,15 @@ extension String {
     }
     
     func find_first_of(c: Character, _ pos: Int = 0) -> Int {
-        for index in pos.stride(to: length(), by: 1) {
-            if at(index) == c {
-                return index
-            }
+        return iterateForward(pos) {
+            self.at($0) == c
         }
-        return String.npos
     }
     
     func find_last_of(str: String, _ pos: Int = String.npos) -> Int {
-        for index in min(length() - 1, pos).stride(through: 0, by: -1) {
-            if str.find(at(index)) != String.npos {
-                return index
-            }
+        return iterateBackward(pos) {
+            str.find(self.at($0)) != String.npos
         }
-        return String.npos
     }
     
     func find_last_of(s: String, _ pos: Int, _ n: Int) -> Int {
@@ -230,12 +209,9 @@ extension String {
     }
     
     func find_last_of(c: Character, _ pos: Int = String.npos) -> Int {
-        for index in min(length() - 1, pos).stride(through: 0, by: -1) {
-            if at(index) == c {
-                return index
-            }
+        return iterateBackward(pos) {
+            self.at($0) == c
         }
-        return String.npos
     }
     
     // TOOD: More methods
@@ -246,6 +222,24 @@ extension String {
     func substr(pos: Int = 0, _ len: Int = String.npos) -> String {
         let end = Int(min(UInt(pos) + UInt(len), UInt(length())))
         return substringWithRange(startIndex.advancedBy(pos) ..< startIndex.advancedBy(end))
+    }
+    
+    private func iterateForward(pos: Int, _ predicate: Int -> Bool) -> Int {
+        for index in pos.stride(to: length(), by: 1) {
+            if predicate(index) {
+                return index
+            }
+        }
+        return String.npos
+    }
+    
+    private func iterateBackward(pos: Int, _ predicate: Int -> Bool) -> Int {
+        for index in min(length() - 1, pos).stride(through: 0, by: -1) {
+            if predicate(index) {
+                return index
+            }
+        }
+        return String.npos
     }
 }
 
