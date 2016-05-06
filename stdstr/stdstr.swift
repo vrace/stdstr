@@ -172,8 +172,29 @@ extension String {
         return String.npos
     }
     
+    func rfind(str: String, _ pos: Int = String.npos) -> Int {
+        for index in min(length() - 1, pos).stride(through: 0, by: -1) {
+            if substr(index, str.length()) == str {
+                return index
+            }
+        }
+        return String.npos
+    }
+    
+    func rfind(s: String, _ pos: Int, _ n: Int) -> Int {
+        return rfind(s.substr(0, n), pos)
+    }
+    
+    func rfind(c: Character, _ pos: Int = String.npos) -> Int {
+        for index in min(length() - 1, pos).stride(through: 0, by: -1) {
+            if self[index] == c {
+                return index
+            }
+        }
+        return String.npos
+    }
+    
     // TOOD: More methods
-    // rfind
     // find_first_of
     // find_last_of
     // find_first_not_of

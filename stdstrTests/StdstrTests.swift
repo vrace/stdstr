@@ -213,6 +213,27 @@ class stdstrTests: XCTestCase {
         
         str.replace(str.find(str2), str2.length(), "preposition")
         XCTAssert(str == "There are two prepositions in this haystack with needles.")
+        
+        found = str.find(Character("T"))
+        XCTAssert(found == 0)
+    }
+    
+    func test_rfind() {
+        var str = "The sixth sick sheik's sixth sheep's sick."
+        let key = "sixth"
+        var found = 0
+        
+        found = str.rfind(key)
+        XCTAssert(found != String.npos)
+        
+        str.replace(found, key.length(), "seventh")
+        XCTAssert(str == "The sixth sick sheik's seventh sheep's sick.")
+        
+        found = str.rfind("sick.")
+        XCTAssert(found != String.npos)
+        
+        found = str.rfind(Character("T"))
+        XCTAssert(found == 0)
     }
     
     func test_substr() {
