@@ -242,4 +242,15 @@ class stdstrTests: XCTestCase {
         XCTAssert(str.substr(3, 5) == "think")
         XCTAssert(str.substr(str.find("live")) == "live in details.")
     }
+    
+    func test_find_first_of() {
+        let vowels = "aeiou"
+        var str = "Please, replace the vowels in this sentence by asterisks."
+        var found = str.find_first_of(vowels)
+        while found != String.npos {
+            str[found] = "*"
+            found = str.find_first_of(vowels, found + 1)
+        }
+        XCTAssert(str == "Pl**s*, r*pl*c* th* v*w*ls *n th*s s*nt*nc* by *st*r*sks.")
+    }
 }

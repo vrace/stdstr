@@ -42,10 +42,10 @@ extension String {
     
     subscript(pos: Int) -> Character {
         get {
-            return self[startIndex.advancedBy(pos)]
+            return at(pos)
         }
         set(newValue) {
-            replaceRange(startIndex.advancedBy(pos) ..< startIndex.advancedBy(pos + 1), with: String(newValue))
+            replace(pos, 1, String(newValue))
         }
     }
     
@@ -165,7 +165,7 @@ extension String {
     
     func find(c: Character, _ pos: Int = 0) -> Int {
         for index in pos.stride(to: length(), by: 1) {
-            if self[index] == c {
+            if at(index) == c {
                 return index
             }
         }
@@ -187,7 +187,29 @@ extension String {
     
     func rfind(c: Character, _ pos: Int = String.npos) -> Int {
         for index in min(length() - 1, pos).stride(through: 0, by: -1) {
-            if self[index] == c {
+            if at(index) == c {
+                return index
+            }
+        }
+        return String.npos
+    }
+    
+    func find_first_of(str: String, _ pos: Int = 0) -> Int {
+        for index in pos.stride(to: length(), by: 1) {
+            if str.find(at(index)) != String.npos {
+                return index
+            }
+        }
+        return String.npos
+    }
+    
+    func find_first_of(s: String, _ pos: Int, _ n: Int) -> Int {
+        return find_first_of(s.substr(0, n), pos)
+    }
+    
+    func find_first_of(c: Character, _ pos: Int = 0) -> Int {
+        for index in pos.stride(to: length(), by: 1) {
+            if at(index) == c {
                 return index
             }
         }
@@ -195,7 +217,6 @@ extension String {
     }
     
     // TOOD: More methods
-    // find_first_of
     // find_last_of
     // find_first_not_of
     // find_last_not_of
