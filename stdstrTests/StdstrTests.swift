@@ -154,11 +154,13 @@ class stdstrTests: XCTestCase {
         str.erase(10, 8)
         XCTAssert(str == "This is an sentence.")
         
-        str.erase(9)
-        XCTAssert(str == "This is a")
+        let it1 = str.erase(str.begin().advancedBy(9))
+        XCTAssert(str == "This is a sentence.")
+        XCTAssert(str[it1] == " ")
         
-        str.erase()
-        XCTAssert(str == "")
+        let it2 = str.erase(str.begin().advancedBy(5), str.end().advancedBy(-9))
+        XCTAssert(str == "This sentence.")
+        XCTAssert(str[it2] == "s")
     }
     
     func test_replace() {

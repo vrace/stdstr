@@ -147,7 +147,19 @@ extension String {
     }
     
     mutating func erase(pos: Int = 0, _ len: Int = String.npos) -> String {
-        return replace(pos, len, "")
+        return replace(pos, len, String())
+    }
+    
+    mutating func erase(p: Index) -> Index {
+        let distance = begin().distanceTo(p)
+        replaceRange(p ..< p.advancedBy(1), with: String())
+        return begin().advancedBy(distance)
+    }
+    
+    mutating func erase(first: Index, _ last: Index) -> Index {
+        let distance = begin().distanceTo(first)
+        replaceRange(first ..< last, with: String())
+        return begin().advancedBy(distance)
     }
     
     mutating func replace(pos: Int, _ len: Int, _ str: String) -> String {
@@ -322,8 +334,6 @@ extension String {
 // template <class InputIterator> string& append(InputIterator first, InputIterator last);
 // template <class InputIterator> string& assign(InputIterator first, InputIterator last);
 // template <class InputIterator> void insert(iterator p, InputIterator first, InputIterator last);
-// iterator erase(iterator p);
-// iterator erase(iterator first, iterator last);
 // string& replace(iterator i1, iterator i2, const string &str);
 // string& replace(iterator i1, iterator i2, const char *s, size_t n);
 // string& replace(iteratir i1, iterator i2, size_t n, char c);
