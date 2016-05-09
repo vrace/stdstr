@@ -26,7 +26,7 @@ extension String {
     static let npos: Int = Int.max
     
     func size() -> Int {
-        return characters.count
+        return length()
     }
     
     func length() -> Int {
@@ -34,9 +34,7 @@ extension String {
     }
     
     mutating func resize(n: Int) {
-        if self.length() >= n {
-            self = substr(0, n)
-        }
+        self = substr(0, n)
     }
     
     mutating func resize(n: size_t, _ c: Character) {
@@ -131,8 +129,7 @@ extension String {
     }
     
     mutating func erase(pos: Int = 0, _ len: Int = String.npos) -> String {
-        self = replace(pos, len, "")
-        return self
+        return replace(pos, len, "")
     }
     
     mutating func replace(pos: Int, _ len: Int, _ str: String) -> String {

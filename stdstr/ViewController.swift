@@ -24,9 +24,7 @@ class ViewController: UIViewController {
 }
 
 func foobar() {
-    var str = "foobar"
-    str.replace(3, String.npos, "haha")
-    print(str)
+
 }
 
 

@@ -42,7 +42,13 @@ class stdstrTests: XCTestCase {
         str.resize(sz + 2, "+")
         XCTAssert(str == "I like to code in C++")
         
+        str.resize(sz, "*")
+        XCTAssert(str == "I like to code in C")
+        
         str.resize(14)
+        XCTAssert(str == "I like to code")
+        
+        str.resize(14, "!")
         XCTAssert(str == "I like to code")
     }
     
