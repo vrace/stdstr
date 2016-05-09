@@ -25,6 +25,14 @@ import Foundation
 extension String {
     static let npos: Int = Int.max
     
+    func begin() -> Index {
+        return startIndex
+    }
+    
+    func end() -> Index {
+        return endIndex
+    }
+    
     func size() -> Int {
         return length()
     }
@@ -126,6 +134,16 @@ extension String {
     
     mutating func insert(pos: Int, _ n: Int, _ c: Character) -> String {
         return insert(pos, String(count: n, repeatedValue: c))
+    }
+    
+    mutating func insert(p: Index, _ n: Int, _ c: Character) {
+        insertContentsOf(String(count: n, repeatedValue: c).characters, at: p)
+    }
+    
+    mutating func insert(p: Index, _ c: Character) -> Index {
+        let distance = begin().distanceTo(p)
+        insert(c, atIndex: p)
+        return begin().advancedBy(distance)
     }
     
     mutating func erase(pos: Int = 0, _ len: Int = String.npos) -> String {
@@ -285,10 +303,6 @@ extension String {
 //
 // Iterators
 // =========
-// iterator begin();
-// const_iterator begin() const;
-// iterator end();
-// const_iterator end() const;
 // reverse_iterator rbegin();
 // const_reverse_iterator rbegin() const;
 // reverse_iterator rend();
@@ -307,8 +321,6 @@ extension String {
 // =========
 // template <class InputIterator> string& append(InputIterator first, InputIterator last);
 // template <class InputIterator> string& assign(InputIterator first, InputIterator last);
-// void insert(iterator p, size_t n, char c);
-// iterator insert(iterator p, char c);
 // template <class InputIterator> void insert(iterator p, InputIterator first, InputIterator last);
 // iterator erase(iterator p);
 // iterator erase(iterator first, iterator last);

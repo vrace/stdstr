@@ -139,6 +139,13 @@ class stdstrTests: XCTestCase {
         
         str.insert(15, 1, ":")
         XCTAssert(str == "to be not to be: that is the question")
+        
+        let it = str.insert(str.begin().advancedBy(5), ",")
+        XCTAssert(str == "to be, not to be: that is the question")
+        XCTAssert(str[it] == ",")
+        
+        str.insert(str.end(), 3, ".")
+        XCTAssert(str == "to be, not to be: that is the question...")
     }
     
     func test_erase() {

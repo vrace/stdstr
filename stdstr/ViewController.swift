@@ -24,7 +24,14 @@ class ViewController: UIViewController {
 }
 
 func foobar() {
-
+    var str = "0123456789"
+    
+    var it = str.begin().advancedBy(2)
+    print(str[it])
+    
+    it = str.insert(it, "x")
+    print(str)
+    print(str[it])
 }
 
 
