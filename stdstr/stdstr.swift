@@ -164,7 +164,11 @@ extension String {
     
     mutating func replace(pos: Int, _ len: Int, _ str: String) -> String {
         let end = Int(min(UInt(pos) + UInt(len), UInt(length())))
-        replaceRange(startIndex.advancedBy(pos) ..< startIndex.advancedBy(end), with: str)
+        return replace(startIndex.advancedBy(pos), startIndex.advancedBy(end), str)
+    }
+    
+    mutating func replace(i1: Index, _ i2: Index, _ str: String) -> String {
+        replaceRange(i1 ..< i2, with: str)
         return self
     }
     
@@ -176,8 +180,16 @@ extension String {
         return replace(pos, len, s.substr(0, n))
     }
     
+    mutating func replace(i1: Index, _ i2: Index, _ s: String, _ n: Int) -> String {
+        return replace(i1, i2, s.substr(0, n))
+    }
+    
     mutating func replace(pos: Int, _ len: Int, _ n: Int, _ c: Character) -> String {
         return replace(pos, len, String(count: n, repeatedValue: c))
+    }
+    
+    mutating func replace(i1: Index, _ i2: Index, _ n: Int, _ c: Character) -> String {
+        return replace(i1, i2, String(count: n, repeatedValue: c))
     }
     
     mutating func swap(inout str: String) {
@@ -334,9 +346,6 @@ extension String {
 // template <class InputIterator> string& append(InputIterator first, InputIterator last);
 // template <class InputIterator> string& assign(InputIterator first, InputIterator last);
 // template <class InputIterator> void insert(iterator p, InputIterator first, InputIterator last);
-// string& replace(iterator i1, iterator i2, const string &str);
-// string& replace(iterator i1, iterator i2, const char *s, size_t n);
-// string& replace(iteratir i1, iterator i2, size_t n, char c);
 // template <class InputIterator> string& replace(iterator i1, iterator i2, InputIterator first, InputIterator last);
 //
 // String operations

@@ -185,8 +185,17 @@ class stdstrTests: XCTestCase {
         str.replace(22, 1, 3, "!")
         XCTAssert(str == "this is a short phrase!!!")
         
-        str.replace(10, String.npos, "hotdog.")
-        XCTAssert(str == "this is a hotdog.")
+        str.replace(str.begin(), str.end().advancedBy(-3), str3)
+        XCTAssert(str == "sample phrase!!!")
+        
+        str.replace(str.begin(), str.begin().advancedBy(6), "replace")
+        XCTAssert(str == "replace phrase!!!")
+        
+        str.replace(str.begin().advancedBy(8), str.begin().advancedBy(14), "is coolness", 7)
+        XCTAssert(str == "replace is cool!!!")
+        
+        str.replace(str.begin().advancedBy(12), str.end().advancedBy(-4), 4, "o")
+        XCTAssert(str == "replace is cooool!!!")
     }
     
     func test_swap() {
