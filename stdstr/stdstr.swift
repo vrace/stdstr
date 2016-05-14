@@ -22,7 +22,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
     static let npos: Int = Int.max
     
     func begin() -> Index {
