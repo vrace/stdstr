@@ -149,18 +149,18 @@ public extension String {
     }
     
     mutating func erase(pos: Int = 0, _ len: Int = String.npos) -> String {
-        return replace(pos, len, String())
+        return replace(pos, len, "")
     }
     
     mutating func erase(p: Index) -> Index {
         let distance = begin().distanceTo(p)
-        replaceRange(p ..< p.advancedBy(1), with: String())
+        replace(p, p.advancedBy(1), "")
         return begin().advancedBy(distance)
     }
     
     mutating func erase(first: Index, _ last: Index) -> Index {
         let distance = begin().distanceTo(first)
-        replaceRange(first ..< last, with: String())
+        replace(first, last, "")
         return begin().advancedBy(distance)
     }
     
